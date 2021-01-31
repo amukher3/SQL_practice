@@ -1,0 +1,20 @@
+# Write your MySQL query statement below
+
+select round((sum(y.cnter)/count(y.delivery_id))*100,2) as immediate_percentage
+from
+(select coalesce(x.cnter,0) as cnter,d.delivery_id as delivery_id
+from
+(select delivery_id,1 as cnter
+from Delivery
+where order_date=customer_pref_delivery_date) x
+right join Delivery d
+on x.delivery_id=d.delivery_id) y
+
+
+    
+    
+    
+
+    
+
+

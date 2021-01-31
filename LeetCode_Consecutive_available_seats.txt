@@ -1,0 +1,24 @@
+# Write your MySQL query statement below
+
+select y.si as seat_id
+from
+(select x.seat_id as si, lead(x.seat_id,1) over(order by seat_id) as si1
+from
+(select seat_id 
+from cinema
+where free=1) x) y
+where (y.si1-y.si)=1 
+union 
+select y.si1
+from
+(select x.seat_id as si, lead(x.seat_id,1) over(order by seat_id) as si1
+from
+(select seat_id 
+from cinema
+where free=1) x) y
+where (y.si1-y.si)=1 
+order by seat_id
+
+
+
+

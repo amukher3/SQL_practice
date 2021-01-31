@@ -1,0 +1,17 @@
+# Write your MySQL query statement below
+Select class
+from
+(select student,class
+from courses) x
+group by class
+having count(distinct x.student)>=5
+
+/*select x.class
+from
+(select student,class,count(distinct student) as grp_cnt
+from courses
+group by class) x
+where x.grp_cnt>=5*/
+
+
+

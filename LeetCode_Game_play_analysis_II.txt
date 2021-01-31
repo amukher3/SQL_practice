@@ -1,0 +1,12 @@
+# Write your MySQL query statement below
+
+select  a.player_id,a.device_id
+from
+(select player_id as pi,min(event_date) as med
+from Activity
+group by player_id) x
+inner join Activity a
+on x.med=a.event_date
+and x.pi=a.player_id
+
+

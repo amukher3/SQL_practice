@@ -1,0 +1,9 @@
+# Write your MySQL query statement below
+select x.customer_id,count(x.customer_id) as count_no_trans
+from
+(select v.customer_id,coalesce(t.transaction_id,0) as transaction_id
+from Visits v left outer join Transactions t 
+on v.visit_id=t.visit_id) x
+where x.transaction_id=0
+group by x.customer_id
+order by count_no_trans

@@ -1,0 +1,21 @@
+# Write your MySQL query statement below
+Select e.Name as Employee
+from
+(Select e.Id,x.Salary as mgrs_salary
+from 
+(Select Id,Name,Salary
+from 
+Employee) x
+inner join Employee e
+on x.Id=e.ManagerId) y
+inner join Employee e
+on e.Id=y.Id
+where e.Salary>y.mgrs_salary
+
+
+
+
+
+
+
+

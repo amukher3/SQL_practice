@@ -1,0 +1,9 @@
+# Write your MySQL query statement below
+select x.seller_name
+from
+(select s.seller_name,s.seller_id,coalesce(max(YEAR(o.sale_date)),0) as md
+from Orders o right join Seller s
+on o.seller_id=s.seller_id
+group by s.seller_id,s.seller_name) x
+where x.md<>2020 
+order by x.seller_name
