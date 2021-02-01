@@ -1,0 +1,7 @@
+# Write your MySQL query statement below
+Select id,name from Students 
+where department_id not in
+(Select s.department_id
+from Departments d inner join Students s
+on d.id=s.department_id)
+
