@@ -1,0 +1,16 @@
+# Write your MySQL query statement below
+select z.query_name,z.quality,round(((coalesce(h.rating_threshold_count,0)/z.tot_cnt)*100),2) as poor_query_percentage 
+from
+(Select x.query_name as query_name,round(sum(x.q_ratio)/count(x.q_ratio),2) as quality ,count(x.q_ratio) as tot_cnt
+from
+(Select query_name,rating/position as q_ratio,rating
+from Queries) x
+group by query_name) z
+left outer join
+(Select y.query_name as query_name,sum(y.rating_count) as rating_threshold_count
+from
+(Select 1 as rating_count,query_name
+from Queries
+where rating<3) y
+group by y.query_name) h
+on z.query_name=h.query_name
