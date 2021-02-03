@@ -1,0 +1,10 @@
+# Write your MySQL query statement below
+Select sa.student_name as member_A,
+ sb.student_name as member_B,
+ sc.student_name as member_C
+from SchoolA sa
+ join SchoolB sb
+ join SchoolC sc
+on (sa.student_id<>sb.student_id and sa.student_name<>sb.student_name
+   and sb.student_id<>sc.student_id and sb.student_name<>sc.student_name
+   and sc.student_id<>sa.student_id and sc.student_name<>sa.student_name)
