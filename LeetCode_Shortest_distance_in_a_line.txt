@@ -1,0 +1,14 @@
+# Write your MySQL query statement below
+Select min(abs(h.diff_series)) as shortest
+from
+(Select z.pt_x-z.pt_y as diff_series
+from
+(Select y.x as pt_x,point.x as pt_y
+from
+(Select x
+from point) y,point) z
+group by diff_series
+having min(diff_series)<>0) h
+
+
+
