@@ -1,0 +1,9 @@
+# Write your MySQL query statement below
+Select sid as seller_id from
+(select sid,rank() over(order by tot_price DESC) rank_no
+from
+(select s.seller_id as sid,sum(s.price) as tot_price from
+Product as p right join Sales as s
+on p.product_id = s.product_id
+group by s.seller_id) as tab_1) tab_2
+where tab_2.rank_no=1
