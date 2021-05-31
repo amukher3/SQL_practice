@@ -1,0 +1,4 @@
+# Write your MySQL query statement below
+Select name as name from
+(Select name as name,coalesce(referee_id,0) as id from customer) temp_tab
+where temp_tab.id<>2
