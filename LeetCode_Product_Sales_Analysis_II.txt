@@ -1,0 +1,5 @@
+# Write your MySQL query statement below
+Select p.product_id as product_id,sum(s.quantity) as total_quantity
+from Sales as s left join Product as p
+on s.product_id=p.product_id
+group by p.product_id 
