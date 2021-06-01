@@ -1,0 +1,10 @@
+# Write your MySQL query statement below
+Select Employees.employee_id,Employees.name,tab1.cnt as reports_count,tab1.average_age as average_age
+from Employees inner join
+(Select coalesce(reports_to,0) as rt,count(reports_to) as cnt,round(avg(age)) as average_age 
+from Employees
+where reports_to<>0 
+group by reports_to
+having count(reports_to)>=1) tab1
+on tab1.rt=Employees.employee_id
+order by Employees.employee_id
