@@ -1,0 +1,15 @@
+# Write your MySQL query statement below
+Select product_id,store,price
+from
+(Select product_id,'store1' as store,coalesce(store1,-1) as price
+from Products 
+Union
+Select product_id ,'store2' as store,coalesce(store2,-1) as price
+from Products 
+Union
+Select product_id,'store3' as store,coalesce(store3,-1) as price
+from Products) t1
+where price<>-1
+order by product_id
+
+
